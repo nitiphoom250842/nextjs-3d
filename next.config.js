@@ -1,6 +1,8 @@
 /** @type {import('next').NextConfig} */
+const { env } = require('./env-config');
 const nextConfig = {
-  reactStrictMode: true,
-}
+    reactStrictMode: true,
+    env,
+};
 
-module.exports = nextConfig
+module.exports = nextConfig;
