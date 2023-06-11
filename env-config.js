@@ -1,6 +1,6 @@
 const dotenv = require("dotenv");
 
-dotenv.config({ path: `.env.dev` });
+dotenv.config({ path: `.env.${ENV_NAME ? ENV_NAME : "dev"}` });
 
 module.exports = {
   env: {
