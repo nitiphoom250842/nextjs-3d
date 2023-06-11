@@ -1,8 +1,11 @@
 const dotenv = require("dotenv");
 
-dotenv.config({ path: `.env.${ENV_NAME ? ENV_NAME : "dev"}` });
+dotenv.config({ path: `.env.dev` });
 
 module.exports = {
+  experimental: {
+    outputStandalone: true,
+  },
   env: {
     TEST_ENV: process.env.TEST_ENV,
   },
