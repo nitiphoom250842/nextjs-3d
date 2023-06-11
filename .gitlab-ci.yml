@@ -14,10 +14,10 @@ stages:
 build:
   stage: build
   script:
-    - docker build --pull -t "registry.gitlab.com/devphoom/nextjs-tailwind:dev" .
-    - docker push "registry.gitlab.com/devphoom/nextjs-tailwind:dev"
+    - docker build --pull -t "registry.gitlab.com/devphoom/nextjs-tailwind:main" .
+    - docker push "registry.gitlab.com/devphoom/nextjs-tailwind:main"
   only:
-    - dev
+    - main
 # deploy:
 #   stage: deploy
 #   script:
