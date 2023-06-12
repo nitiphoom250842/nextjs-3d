@@ -14,12 +14,14 @@ stages:
 build:
   stage: build
   script:
-    - echo "ls"
+    - echo ENV_NAME
     - echo "Updating env-config.js..."
     - echo "export const ENV_BRANCH = '$ENV_NAME';" > env-config.js
     - echo "env-config.js updated."
     - docker build --pull -t "registry.gitlab.com/devphoom/nextjs-tailwind:main" .
     - docker push "registry.gitlab.com/devphoom/nextjs-tailwind:main"
+  environment:
+    name: main
   only:
     - main
 # deploy:
