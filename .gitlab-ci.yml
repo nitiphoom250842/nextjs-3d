@@ -9,7 +9,7 @@ before_script:
 
 stages:
   - build
-  # - deploy
+  - deploy
 
 build:
   stage: build
@@ -24,9 +24,30 @@ build:
     name: main
   only:
     - main
-# deploy:
-#   stage: deploy
-#   script:
-#     - curl --location --request POST 'https://portainer.devphoom-kup.com/api/webhooks/9f7d8c92-754e-4753-8b3b-c5bb483cb1cc'
-#   only:
-#     - dev
+deploy:
+  stage: deploy
+  script:
+    - curl --location --request POST 'https://portainer.devphoom-kup.com/api/webhooks/189a26c0-06ec-427a-aa7a-3be8f067055d'
+  only:
+    - main
+
+
+build:
+  stage: build
+  script:
+    - echo ENV_NAME
+    - echo "Updating env-config.js..."
+    - echo "const ENV_BRANCH = '$ENV_NAME';" > env-config.js
+    - echo "env-config.js updated."
+    - docker build --pull -t "registry.gitlab.com/devphoom/nextjs-tailwind:dev" .
+    - docker push "registry.gitlab.com/devphoom/nextjs-tailwind:dev"
+  environment:
+    name: dev
+  only:
+    - dev
+deploy:
+  stage: deploy
+  script:
+    - curl --location --request POST 'https://portainer.devphoom-kup.com/api/webhooks/9fa35ca4-07cb-470d-b96c-4bc5387841cf'
+  only:
+    - dev

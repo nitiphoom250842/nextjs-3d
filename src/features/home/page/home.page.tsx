@@ -10,7 +10,7 @@ export function HomePage() {
     <Observer>
       {() => (
         <div className=" h-screen">
-          <p>{process.env.TEST_ENV}</p>
+          <p>env name {process.env.TEST_ENV}</p>
         </div>
       )}
     </Observer>
