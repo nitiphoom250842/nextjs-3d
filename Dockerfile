@@ -13,6 +13,9 @@ RUN yarn install --frozen-lockfile
 # Rebuild the source code only when needed
 FROM node:16-alpine AS builder
 WORKDIR /app
+COPY .env.dev .env.dev
+COPY .env.uat .env.ust
+COPY .env.prod .env.prod
 COPY --from=deps /app/node_modules ./node_modules
 COPY . .
 
