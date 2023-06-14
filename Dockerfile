@@ -2,10 +2,9 @@
 FROM node:16-alpine AS deps
 # Check https://github.com/nodejs/docker-node/tree/b4117f9333da4138b03a546ec926ef50a31506c3#nodealpine to understand why libc6-compat might be needed.
 RUN apk add --no-cache libc6-compat
-RUN ls
+
 WORKDIR /app
 COPY package.json yarn.lock ./
-COPY env-config.js env-config.js ./
 RUN yarn install --frozen-lockfile
 
 # If using npm with a `package-lock.json` comment out above and use below instead
@@ -51,6 +50,8 @@ COPY --from=builder --chown=nextjs:nodejs /app/.next/standalone ./
 COPY --from=builder --chown=nextjs:nodejs /app/.next/static ./.next/static
 
 USER nextjs
+COPY env-config.js env-config.js /app/
+RUN ls
 
 EXPOSE 3000
 
