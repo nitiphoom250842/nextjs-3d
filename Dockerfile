@@ -9,8 +9,8 @@ COPY .env.dev .env.dev /app/
 COPY .env.prod .env.prod /app/
 COPY .env.uat .env.uat /app/
 COPY package.json yarn.lock ./
-RUN yarn install --frozen-lockfile
 RUN ls
+RUN yarn install --frozen-lockfile
 
 # If using npm with a `package-lock.json` comment out above and use below instead
 # COPY package.json package-lock.json ./ 
