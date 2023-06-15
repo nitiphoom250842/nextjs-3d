@@ -4,8 +4,13 @@ FROM node:16-alpine AS deps
 RUN apk add --no-cache libc6-compat
 
 WORKDIR /app
+COPY env-config.js env-config.js /app/
+COPY .env.dev .env.dev /app/
+COPY .env.prod .env.prod /app/
+COPY .env.uat .env.uat /app/
 COPY package.json yarn.lock ./
 RUN yarn install --frozen-lockfile
+RUN ls
 
 # If using npm with a `package-lock.json` comment out above and use below instead
 # COPY package.json package-lock.json ./ 
@@ -50,11 +55,7 @@ COPY --from=builder --chown=nextjs:nodejs /app/.next/standalone ./
 COPY --from=builder --chown=nextjs:nodejs /app/.next/static ./.next/static
 
 USER nextjs
-COPY env-config.js env-config.js /app/
-COPY .env.dev .env.dev /app/
-COPY .env.prod .env.prod /app/
-COPY .env.uat .env.uat /app/
-RUN ls
+
 
 EXPOSE 3000
 
