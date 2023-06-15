@@ -50,11 +50,11 @@ COPY --from=builder --chown=nextjs:nodejs /app/.next/standalone ./
 COPY --from=builder --chown=nextjs:nodejs /app/.next/static ./.next/static
 
 USER nextjs
-COPY env-config.js env-config.js /app/
-COPY .env.dev .env.dev /app/
-COPY .env.prod .env.prod /app/
-COPY .env.uat .env.uat /app/
-RUN ls
+# COPY env-config.js env-config.js /app/
+# COPY .env.dev .env.dev /app/
+# COPY .env.prod .env.prod /app/
+# COPY .env.uat .env.uat /app/
+# RUN ls
 
 EXPOSE 3000
 
