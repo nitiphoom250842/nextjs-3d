@@ -6,6 +6,9 @@ import { TweenLite } from "gsap";
 import { ButtonView } from "../components/button.view";
 import { ModleDetail } from "../components/modle.detail";
 
+let camera: any;
+let loadedModel: any;
+
 export function PageFullModel() {
   const scene = new THREE.Scene();
   const loader = new GLTFLoader();
@@ -17,9 +20,7 @@ export function PageFullModel() {
   // const [clickModel, setclickModel] = useState(false);
   // const light = new THREE.PointLight("#FFFF", 0, 100);
   let renderer: any;
-  let camera: any;
   let controls: any;
-  let loadedModel: any;
   let clickModel: boolean;
 
   useEffect(() => {
@@ -90,12 +91,6 @@ export function PageFullModel() {
     return () => {
       window.removeEventListener("resize", handleResize);
     };
-  }, []);
-
-  useEffect(() => {
-    const targetPosition = new THREE.Vector3(10, 20, -10);
-    const duration = 4;
-    moveCameraTo(targetPosition, duration);
   }, []);
 
   const handleClick = (event: any) => {
@@ -182,119 +177,111 @@ export function PageFullModel() {
     renderer.render(scene, camera);
   }
 
-  const moveCameraTo = (targetPosition: THREE.Vector3, duration: number) => {
-    try {
-      const currentPosition = camera.position.clone();
+  const moveCameraTo = (targetPosition: any, duration: number) => {
+    if (camera) {
+      const currentPosition: any = camera.position.clone();
       TweenLite.to(currentPosition, duration, {
         x: targetPosition.x,
         y: targetPosition.y,
         z: targetPosition.z,
         onUpdate: () => {
-          camera.position.copy(currentPosition);
+          camera?.position?.copy(currentPosition);
         },
       });
-    } catch (error) {}
+    } else {
+      console.log(camera);
+    }
   };
   return (
     <div className="h-screen relative">
-      <div className="p-8">LSC</div>
+      <div className="p-8">poc lib 3D</div>
       <canvas ref={canvasRef} id="myThreeJsCanvasFull"></canvas>
       <p className="p-4">กดปุ่มเพื่อไปยังส่วนต่างๆ</p>
       <div className="grid grid-cols-4 gap-4 p-8 ">
         <ButtonView
           text="ไปยังจุด A"
           onClick={() => {
-            try {
-              const targetPosition = new THREE.Vector3(10, 60, -170);
-              const duration = 2;
-              moveCameraTo(targetPosition, duration);
-              setshowDetail(1);
-              setdataDetail("ไปยังจุด A");
-              loadedModel.traverse((obj: any) => {
-                if (obj.isMesh && obj.material) {
-                  if (obj.name == "GRM_A2") {
-                    obj.material.color.set("#DCFAF9");
-                  } else {
-                    obj.material.color.set("#FFFFFF");
-                  }
+            const targetPosition = new THREE.Vector3(10, 60, -170);
+            const duration = 2;
+            moveCameraTo(targetPosition, duration);
+            setshowDetail(1);
+            setdataDetail("ไปยังจุด A");
+            loadedModel.traverse((obj: any) => {
+              if (obj.isMesh && obj.material) {
+                if (obj.name == "GRM_A2") {
+                  obj.material.color.set("#DCFAF9");
+                } else {
+                  obj.material.color.set("#FFFFFF");
                 }
-              });
-            } catch (error) {}
+              }
+            });
           }}
         />
         <ButtonView
           text="ไปยังจุด B"
           onClick={() => {
-            try {
-              const targetPosition = new THREE.Vector3(100, 130, 190);
-              const duration = 2;
-              moveCameraTo(targetPosition, duration);
-              setshowDetail(2);
-              setdataDetail("ไปยังจุด B");
-              loadedModel.traverse((obj: any) => {
-                if (obj.isMesh && obj.material) {
-                  if (obj.name == "Cube") {
-                    obj.material.color.set("#DCFAF9");
-                  } else {
-                    obj.material.color.set("#FFFFFF");
-                  }
+            const targetPosition = new THREE.Vector3(100, 130, 190);
+            const duration = 2;
+            moveCameraTo(targetPosition, duration);
+            setshowDetail(2);
+            setdataDetail("ไปยังจุด B");
+            loadedModel.traverse((obj: any) => {
+              if (obj.isMesh && obj.material) {
+                if (obj.name == "Cube") {
+                  obj.material.color.set("#DCFAF9");
+                } else {
+                  obj.material.color.set("#FFFFFF");
                 }
-              });
-            } catch (error) {}
+              }
+            });
           }}
         />
         <ButtonView
           text="ไปยังจุด C"
           onClick={() => {
-            try {
-              const targetPosition = new THREE.Vector3(300, 330, 90);
-              const duration = 2;
-              moveCameraTo(targetPosition, duration);
-              setshowDetail(3);
-              setdataDetail("ไปยังจุด C");
-              loadedModel.traverse((obj: any) => {
-                if (obj.isMesh && obj.material) {
-                  if (obj.name == "Grm_B1-2") {
-                    obj.material.color.set("#DCFAF9");
-                  } else {
-                    obj.material.color.set("#FFFFFF");
-                  }
+            const targetPosition = new THREE.Vector3(300, 330, 90);
+            const duration = 2;
+            moveCameraTo(targetPosition, duration);
+            setshowDetail(3);
+            setdataDetail("ไปยังจุด C");
+            loadedModel.traverse((obj: any) => {
+              if (obj.isMesh && obj.material) {
+                if (obj.name == "Grm_B1-2") {
+                  obj.material.color.set("#DCFAF9");
+                } else {
+                  obj.material.color.set("#FFFFFF");
                 }
-              });
-            } catch (error) {}
+              }
+            });
           }}
         />
         <ButtonView
           text="ไปยังจุด D"
           onClick={() => {
-            try {
-              const targetPosition = new THREE.Vector3(100, 120, -120);
-              const duration = 2;
-              moveCameraTo(targetPosition, duration);
-              setshowDetail(4);
-              setdataDetail("ไปยังจุด D");
-              loadedModel.traverse((obj: any) => {
-                if (obj.isMesh && obj.material) {
-                  if (obj.name == "Plane001") {
-                    obj.material.color.set("#DCFAF9");
-                  } else {
-                    obj.material.color.set("#FFFFFF");
-                  }
+            const targetPosition = new THREE.Vector3(100, 120, -120);
+            const duration = 2;
+            moveCameraTo(targetPosition, duration);
+            setshowDetail(4);
+            setdataDetail("ไปยังจุด D");
+            loadedModel.traverse((obj: any) => {
+              if (obj.isMesh && obj.material) {
+                if (obj.name == "Plane001") {
+                  obj.material.color.set("#DCFAF9");
+                } else {
+                  obj.material.color.set("#FFFFFF");
                 }
-              });
-            } catch (error) {}
+              }
+            });
           }}
         />
         <ButtonView
           text="ไปยังจุด E"
           onClick={() => {
-            try {
-              const targetPosition = new THREE.Vector3(12, 1, 0);
-              const duration = 2;
-              moveCameraTo(targetPosition, duration);
-              setshowDetail(4);
-              setdataDetail("ไปยังจุด E");
-            } catch (error) {}
+            const targetPosition = new THREE.Vector3(12, 1, 0);
+            const duration = 2;
+            moveCameraTo(targetPosition, duration);
+            setshowDetail(4);
+            setdataDetail("ไปยังจุด E");
           }}
         />
       </div>
