@@ -27,7 +27,14 @@ body {
 }
 
 #myThreeJsCanvasFull {
-  height:400px !important;
+  height: 400px !important;
+  width: 100% !important;
+  display: flex;
+  justify-content: center;
+}
+
+#myThreeJsCanvasPart {
+  height: 400px !important;
   width: 100% !important;
   display: flex;
   justify-content: center;

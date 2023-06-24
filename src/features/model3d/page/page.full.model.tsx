@@ -205,7 +205,7 @@ export function PageFullModel() {
             const duration = 2;
             moveCameraTo(targetPosition, duration);
             setshowDetail(1);
-            setdataDetail("ไปยังจุด A");
+            setdataDetail("ไปยังจุด Detail A");
             loadedModel.traverse((obj: any) => {
               if (obj.isMesh && obj.material) {
                 if (obj.name == "GRM_A2") {
@@ -224,7 +224,7 @@ export function PageFullModel() {
             const duration = 2;
             moveCameraTo(targetPosition, duration);
             setshowDetail(2);
-            setdataDetail("ไปยังจุด B");
+            setdataDetail("ไปยังจุด Detail B");
             loadedModel.traverse((obj: any) => {
               if (obj.isMesh && obj.material) {
                 if (obj.name == "Cube") {
@@ -243,7 +243,7 @@ export function PageFullModel() {
             const duration = 2;
             moveCameraTo(targetPosition, duration);
             setshowDetail(3);
-            setdataDetail("ไปยังจุด C");
+            setdataDetail("ไปยังจุด Detail C");
             loadedModel.traverse((obj: any) => {
               if (obj.isMesh && obj.material) {
                 if (obj.name == "Grm_B1-2") {
@@ -262,7 +262,7 @@ export function PageFullModel() {
             const duration = 2;
             moveCameraTo(targetPosition, duration);
             setshowDetail(4);
-            setdataDetail("ไปยังจุด D");
+            setdataDetail("ไปยังจุด Detail D");
             loadedModel.traverse((obj: any) => {
               if (obj.isMesh && obj.material) {
                 if (obj.name == "Plane001") {
@@ -281,7 +281,21 @@ export function PageFullModel() {
             const duration = 2;
             moveCameraTo(targetPosition, duration);
             setshowDetail(4);
-            setdataDetail("ไปยังจุด E");
+            setdataDetail("ไปยังจุด Detail E");
+          }}
+        />
+        <ButtonView
+          text="ปิดการแสดงผล Detail"
+          onClick={() => {
+            const targetPosition = new THREE.Vector3(100, 220, -120);
+            const duration = 2;
+            moveCameraTo(targetPosition, duration);
+            setshowDetail(0);
+            loadedModel.traverse((obj: any) => {
+              if (obj.isMesh && obj.material) {
+                obj.material.color.set("#FFFFFF");
+              }
+            });
           }}
         />
       </div>
