@@ -25,3 +25,10 @@ body {
     )
     rgb(var(--background-start-rgb));
 }
+
+#myThreeJsCanvasFull {
+  height:400px !important;
+  width: 100% !important;
+  display: flex;
+  justify-content: center;
+}
